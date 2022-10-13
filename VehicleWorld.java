@@ -79,12 +79,12 @@ public class VehicleWorld extends World
 
         // Chance to spawn a Pedestrian
         if (Greenfoot.getRandomNumber (60) == 0){
-            int xSpawnLocation = Greenfoot.getRandomNumber (600) + 100; // random between 99 and 699, so not near edges
+            int xSpawnLocation = Greenfoot.getRandomNumber (600) + 50; // random between 99 and 699, so not near edges
             boolean spawnAtTop = Greenfoot.getRandomNumber(2) == 0 ? true : false;
             if (spawnAtTop){
-                addObject (new Pedestrian (1), xSpawnLocation, 50);
+                addObject (new NormPed (1), xSpawnLocation, 50);
             } else {
-                addObject (new Pedestrian (-1), xSpawnLocation, 550);
+                addObject (new NormPed (-1), xSpawnLocation, 550);
             }
         }
     }

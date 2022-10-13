@@ -19,18 +19,12 @@ public class NormPed extends Pedestrian
     public static boolean awake;
     public NormPed(int direction) {
         super(direction);
+         // choose a random speed
+        maxSpeed = Math.random() * 2 + 1;
+        speed = maxSpeed;
+        // start as awake 
+        awake = true;
     }
-    public void act()
-    {
-        if (awake){
-            if (getOneObjectAtOffset(0, (int)(direction * getImage().getHeight()/2 + (int)(direction * speed)), Vehicle.class) == null){
-                setLocation (getX(), getY() + (int)(speed*direction));
-            }
-            if (direction == -1 && getY() < 100){
-                getWorld().removeObject(this);
-            } else if (direction == 1 && getY() > 550){
-                getWorld().removeObject(this);
-            }
-        }
-    }
+
 }
+
