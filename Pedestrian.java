@@ -57,4 +57,13 @@ public abstract class Pedestrian extends SuperSmoothMover
     public static boolean isAwake () {
         return awake;
     }
+    
+    public static boolean isNotAwake () {
+        if (awake = true){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

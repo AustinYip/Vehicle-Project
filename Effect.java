@@ -1,19 +1,20 @@
     import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Effect here.
+ * fade away effect 
+ * Credit: Mr Cohen's VehicleSim2022v2.DEMO3
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Austin Yip
+ * @version 1
  */
 public class Effect extends Actor
 {
-    /**
-     * Act - do whatever the Effect wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    protected GreenfootImage image;
+    
+    protected void fade (int timeLeft, int fadeTime) {
+        double percent = timeLeft / (double)fadeTime;
+        // Transparency 0 -- 255
+        int newTransparency = (int)(percent * 255);
+        image.setTransparency(newTransparency);
     }
 }

@@ -16,9 +16,9 @@ public class VehicleWorld extends World
     private GreenfootImage background;
 
     // Color Constants
-    public static Color GREY_BORDER = new Color (108, 108, 108);
-    public static Color GREY_STREET = new Color (88, 88, 88);
-    public static Color YELLOW_LINE = new Color (255, 216, 0);
+    public static Color GREY_BORDER = new Color (0, 100, 158);
+    public static Color GREY_STREET = new Color (26, 127, 186);
+    public static Color YELLOW_LINE = new Color (255, 255, 255);
 
     // Instance variables / Objects
     private boolean twoWayTraffic, splitAtCenter;
@@ -42,21 +42,24 @@ public class VehicleWorld extends World
         setBackground (background);
 
         // Set critical variables
-        laneCount = 6;
+        laneCount = 4;
         laneHeight = 48;
-        spaceBetweenLanes = 6;
-        splitAtCenter = true;
+        spaceBetweenLanes = 10;
+        splitAtCenter = false;
         twoWayTraffic = true;
 
         // Init lane spawner objects 
         laneSpawners = new VehicleSpawner[laneCount];
 
         // Prepare lanes method - draws the lanes
-        lanePositionsY = prepareLanes (this, background, laneSpawners, 222, laneHeight, laneCount, spaceBetweenLanes, twoWayTraffic, splitAtCenter);
+        lanePositionsY = prepareLanes (this, background, laneSpawners, 210, laneHeight, laneCount, spaceBetweenLanes, twoWayTraffic, splitAtCenter);
 
     }
     public void act () {
         spawn();
+        
+        Sun sun = new Sun();
+        addObject(sun,800,0);
     }
     private void spawn () {
         // Chance to spawn a vehicle

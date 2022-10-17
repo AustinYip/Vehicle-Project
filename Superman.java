@@ -28,11 +28,12 @@ public class Superman extends Vehicle
         }
     }
     public boolean checkHitPedestrian () {
-        Pedestrian p = (Pedestrian)getOneObjectAtOffset((int)speed + getImage().getWidth()/2, 0, Pedestrian.class);
-        
+        Pedestrian p = (Pedestrian)getOneIntersectingObject(Pedestrian.class);
         if (p != null){
-            p.knockDown();
-            return true;
+            if (!p.isAwake()){
+                getWorld().removeObject(p);
+                return true;
+            }
         }
         return false;
     }

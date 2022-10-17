@@ -17,6 +17,9 @@ public class NormPed extends Pedestrian
     protected double maxSpeed;
     protected int direction;
     public static boolean awake;
+    
+    GreenfootImage[] walkingRight = new GreenfootImage[10];
+    
     public NormPed(int direction) {
         super(direction);
          // choose a random speed
@@ -24,7 +27,30 @@ public class NormPed extends Pedestrian
         speed = maxSpeed;
         // start as awake 
         awake = true;
+        
+        
+        for (int i = 0; i<walkingRight.length; i++)
+        {
+            walkingRight[i] = new GreenfootImage("images/walking/tile00" + i + ".png");
+        }
     }
-
+    
+    
+    int imageIndex = 0;
+    public void act(){
+        setImage(walkingRight[imageIndex]);
+        imageIndex = (imageIndex+1)%walkingRight.length; 
+        if (awake){
+            if (getOneObjectAtOffset(0, (int)(direction * getImage().getHeight()/2 + (int)(direction * speed)), Vehicle.class) == null){
+                setLocation (getX(), getY() + (int)(speed*direction));
+            }
+            if (direction == -1 && getY() < 100){
+                getWorld().removeObject(this);
+            } else if (direction == 1 && getY() > 550){
+                getWorld().removeObject(this);
+            }
+        }
+    }
+    
 }
 

@@ -37,8 +37,8 @@ public class Bus extends Vehicle
     }
 
     public boolean checkHitPedestrian () {
-        Pedestrian p = (Pedestrian)getOneObjectAtOffset((int)speed + getImage().getWidth()/2, 0, Pedestrian.class);
-        
+        Pedestrian p = (Pedestrian)getOneIntersectingObject(Pedestrian.class);
+        //Pedestrian p = (Pedestrian)getOneObjectAtOffset((int)speed + getImage().getWidth()/2, 0, Pedestrian.class);
         if (p != null){
             timer = 60;
             speed = 0;
