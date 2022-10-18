@@ -40,9 +40,11 @@ public class Bus extends Vehicle
         Pedestrian p = (Pedestrian)getOneIntersectingObject(Pedestrian.class);
         //Pedestrian p = (Pedestrian)getOneObjectAtOffset((int)speed + getImage().getWidth()/2, 0, Pedestrian.class);
         if (p != null){
-            timer = 60;
-            speed = 0;
-            getWorld().removeObject(p);
+            if (p.isAwake()){
+                timer = 60;
+                speed = 0;
+                getWorld().removeObject(p);
+            }
             return true;
         }
         return false;

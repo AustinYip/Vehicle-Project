@@ -12,12 +12,6 @@ public class NormPed extends Pedestrian
      * Act - do whatever the NormPed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
-    protected double speed;
-    protected double maxSpeed;
-    protected int direction;
-    public static boolean awake;
-    
     GreenfootImage[] walkingRight = new GreenfootImage[10];
     
     public NormPed(int direction) {
@@ -51,6 +45,5 @@ public class NormPed extends Pedestrian
             }
         }
     }
-    
 }
 

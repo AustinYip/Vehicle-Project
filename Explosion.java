@@ -69,6 +69,8 @@ public class Explosion extends Effect
         redraw();
         // Set this Actor's graphic as the image I just created
         this.setImage(fireImage);
+        
+        init();
     }
 
     public void addedToWorld (World w){
@@ -90,7 +92,6 @@ public class Explosion extends Effect
         explosionSounds = new GreenfootSound[48]; // lots of simultaneous explosioning!
         for (int i = 0; i < explosionSounds.length; i++){
             explosionSounds[i] = new GreenfootSound("explosion2.wav");
-
         }   
     }
 
@@ -112,13 +113,12 @@ public class Explosion extends Effect
                 p.knockDown();
                 getWorld().removeObject(p);
             }
-            for (Vehicle v : getObjectsInRange(maxSize, Pedestrian.class)){
-            
-            getWorld().removeObject(this);
+            for (Vehicle v : getObjectsInRange(maxSize, Vehicle.class)){
+                getWorld().removeObject(this);
             }
         // remove it from the World
     }    
-
+    }
     /**
      * redraw() method is a private method called by this object each act
      * in order to redraw the graphic
@@ -130,10 +130,12 @@ public class Explosion extends Effect
         blue = Math.min(255, Math.max(0, blue + (10 / steps)));
         // reduce transparency, but ensure it doesn't fall below zero - that would cause
         // a crash
-        if (transparency - (255 / steps) > 0)
+        if (transparency - (255 / steps) > 0){
             transparency -= (255 / steps);
-        else
+        }
+        else{
             transparency = 0;
+        }
 
         // update Color
         currentColor = new Color (red, green, blue);
