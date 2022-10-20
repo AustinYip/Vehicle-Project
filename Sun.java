@@ -23,10 +23,13 @@ public class Sun extends Actor
     public void act()
     {
         actsLeft--;
-        if (actsLeft == 30){
+        if (actsLeft == 120){
             setImage (redImage);
-        } else if (actsLeft == 0){
-            int explosionSize = Greenfoot.getRandomNumber(150) + 100;
+        } else if (actsLeft == 60){
+            setImage (explodingImage);
+        }
+        else if (actsLeft == 0){
+            int explosionSize = 40;
             getWorld().addObject(new Explosion(explosionSize), getX(), getY());
             getWorld().removeObject(this);
         }

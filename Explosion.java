@@ -114,10 +114,10 @@ public class Explosion extends Effect
                 getWorld().removeObject(p);
             }
             for (Vehicle v : getObjectsInRange(maxSize, Vehicle.class)){
-                getWorld().removeObject(this);
+                getWorld().removeObject(v);
             }
-        // remove it from the World
-    }    
+            // remove it from the World
+        }    
     }
     /**
      * redraw() method is a private method called by this object each act

@@ -90,6 +90,13 @@ public class VehicleWorld extends World
                 addObject (new NormPed (-1), xSpawnLocation, 550);
             }
         }
+        
+        
+        //chance to explode sun
+        if(Greenfoot.getRandomNumber(600)== 0 ){
+            addObject(new Sun(),800, 0);
+            System.out.println("Here");
+        }
     }
 
       /**
