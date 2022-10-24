@@ -12,7 +12,7 @@ public class SuperPed extends Pedestrian
      * Act - do whatever the SuperPed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int timer = 480;
+    private int timer = 240;
     private boolean supermode;
     
     
@@ -34,7 +34,7 @@ public class SuperPed extends Pedestrian
         }
         for (int i = 0; i<walkingRightSuper.length; i++)
         {
-            walkingRight[i] = new GreenfootImage("images/superwalking2/tile00" + i + ".png");
+            walkingRightSuper[i] = new GreenfootImage("images/superwalking2/tile00" + i + ".png");
         }
     }
     
@@ -43,8 +43,8 @@ public class SuperPed extends Pedestrian
     public void act()
     {
         timer--;
-    
-        if (timer == 180){
+        
+        if (timer == 60){
             supermode = true;
         }
         if (timer == 0){
@@ -52,14 +52,13 @@ public class SuperPed extends Pedestrian
             timer = 480;
         }
         superact();
-        
-        if (supermode = false){
+        if (supermode == false){
             setImage(walkingRight[imageIndex]);
             imageIndex = (imageIndex+1)%walkingRight.length; 
         }
         else{
             setImage(walkingRightSuper[imageIndex2]);
-            imageIndex = (imageIndex+1)%walkingRightSuper.length; 
+            imageIndex2 = (imageIndex2+1)%walkingRightSuper.length; 
         }
         if (awake){
             if (getOneObjectAtOffset(0, (int)(direction * getImage().getHeight()/2 + (int)(direction * speed)), Vehicle.class) == null){
@@ -71,10 +70,13 @@ public class SuperPed extends Pedestrian
                 getWorld().removeObject(this);
             }
         }
+        else{
+            setImage(image);
+        }
     }
     
     private void superact(){
-        if (supermode = true){
+        if (supermode){
             if(!awake){
                 this.healMe();
             }

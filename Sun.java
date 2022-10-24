@@ -31,6 +31,7 @@ public class Sun extends Actor
         else if (actsLeft == 0){
             int explosionSize = 2000;
             getWorld().addObject(new Explosion(explosionSize), getX(), getY());
+            
             getWorld().removeObject(this);
         }
     }

@@ -48,11 +48,14 @@ public class Superman extends Vehicle
     }
     public void clearLane(){
         for(int i = 0; i<800; i++){
-            Vehicle v = (Vehicle) getOneObjectAtOffset(getX() + i*direction, getY(), Vehicle.class);
+            Vehicle v = (Vehicle) getOneObjectAtOffset(i*direction, 0, Vehicle.class);
             if (v != null){
                 getWorld().removeObject(v);
             }
         }
+        LaserBeam l = new LaserBeam();
+        getWorld().addObject(l, getX() + direction*(getImage().getWidth()/2 + l.getImage().getWidth()/2), getY());
     }
+    
 }
   

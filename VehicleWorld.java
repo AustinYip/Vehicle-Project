@@ -59,7 +59,6 @@ public class VehicleWorld extends World
     public void act () {
         spawn();
         
-        
     }
     private void spawn () {
         // Chance to spawn a vehicle
