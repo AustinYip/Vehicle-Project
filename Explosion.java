@@ -15,6 +15,8 @@ public class Explosion extends Effect
     // This is static, so a single Array is created and shared by all Explosion objects.
     // This is safe because Greenfoot runs these commands consecutively, not simultaneously,
     // so there is no threat of a conflict. 
+    
+    private GreenfootSound explosionSound = new GreenfootSound("explosion2.wav");
     private static GreenfootSound[] explosionSounds;
     private static int explosionSoundsIndex = 0; 
     private GreenfootImage fireImage;
@@ -70,17 +72,13 @@ public class Explosion extends Effect
         // Set this Actor's graphic as the image I just created
         this.setImage(fireImage);
         
-        init();
+        explosionSound.play();
     }
 
     public void addedToWorld (World w){
         if (maxSize > 30){
-            explosionSounds[explosionSoundsIndex].setVolume(Math.min(maxSize, 60));
-            explosionSounds[explosionSoundsIndex].play();
-            explosionSoundsIndex++;
-            if (explosionSoundsIndex >= explosionSounds.length){
-                explosionSoundsIndex = 0;
-            }
+            explosionSound.setVolume(Math.min(maxSize, 60));
+            explosionSound.play();
         }
     }
 
@@ -89,7 +87,7 @@ public class Explosion extends Effect
      */
     public static void init(){
         explosionSoundsIndex = 0;
-        explosionSounds = new GreenfootSound[48]; // lots of simultaneous explosioning!
+        explosionSounds = new GreenfootSound[1]; // lots of simultaneous explosioning!
         for (int i = 0; i < explosionSounds.length; i++){
             explosionSounds[i] = new GreenfootSound("explosion2.wav");
         }   
@@ -116,7 +114,7 @@ public class Explosion extends Effect
             for (Vehicle v : getObjectsInRange(maxSize, Vehicle.class)){
                 getWorld().removeObject(v);
             }
-            // remove it from the World
+            getWorld().removeObject(this);
         }    
     }
     /**
@@ -130,13 +128,14 @@ public class Explosion extends Effect
         blue = Math.min(255, Math.max(0, blue + (10 / steps)));
         // reduce transparency, but ensure it doesn't fall below zero - that would cause
         // a crash
+        /*
         if (transparency - (255 / steps) > 0){
             transparency -= (255 / steps);
         }
         else{
             transparency = 0;
         }
-
+        */
         // update Color
         currentColor = new Color (red, green, blue);
 

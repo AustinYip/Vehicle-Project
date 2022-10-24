@@ -29,7 +29,7 @@ public class Sun extends Actor
             setImage (explodingImage);
         }
         else if (actsLeft == 0){
-            int explosionSize = 40;
+            int explosionSize = 2000;
             getWorld().addObject(new Explosion(explosionSize), getX(), getY());
             getWorld().removeObject(this);
         }

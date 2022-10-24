@@ -13,7 +13,7 @@ public class NormPed extends Pedestrian
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     GreenfootImage[] walkingRight = new GreenfootImage[10];
-    
+    private GreenfootImage image = new GreenfootImage("dead1.png");
     public NormPed(int direction) {
         super(direction);
          // choose a random speed
@@ -43,6 +43,9 @@ public class NormPed extends Pedestrian
             } else if (direction == 1 && getY() > 550){
                 getWorld().removeObject(this);
             }
+        }
+        else{
+            setImage(image);
         }
     }
 }

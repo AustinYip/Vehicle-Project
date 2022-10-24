@@ -44,8 +44,9 @@ public class Bus extends Vehicle
                 timer = 60;
                 speed = 0;
                 getWorld().removeObject(p);
+                return true;
             }
-            return true;
+            return false;
         }
         return false;
     }

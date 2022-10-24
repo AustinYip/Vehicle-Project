@@ -25,7 +25,9 @@ public class VehicleWorld extends World
     private int laneHeight, laneCount, spaceBetweenLanes;
     private int[] lanePositionsY;
     private VehicleSpawner[] laneSpawners;
-
+    
+    
+    private static final int corpse = 10;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -42,10 +44,10 @@ public class VehicleWorld extends World
         setBackground (background);
 
         // Set critical variables
-        laneCount = 4;
+        laneCount = 6;
         laneHeight = 48;
         spaceBetweenLanes = 10;
-        splitAtCenter = false;
+        splitAtCenter = true;
         twoWayTraffic = true;
 
         // Init lane spawner objects 
@@ -53,13 +55,11 @@ public class VehicleWorld extends World
 
         // Prepare lanes method - draws the lanes
         lanePositionsY = prepareLanes (this, background, laneSpawners, 210, laneHeight, laneCount, spaceBetweenLanes, twoWayTraffic, splitAtCenter);
-
     }
     public void act () {
         spawn();
         
-        Sun sun = new Sun();
-        addObject(sun,800,0);
+        
     }
     private void spawn () {
         // Chance to spawn a vehicle
@@ -81,7 +81,7 @@ public class VehicleWorld extends World
         }
 
         // Chance to spawn a Pedestrian
-        if (Greenfoot.getRandomNumber (60) == 0){
+        if (Greenfoot.getRandomNumber (80) == 0){
             int xSpawnLocation = Greenfoot.getRandomNumber (600) + 50; // random between 99 and 699, so not near edges
             boolean spawnAtTop = Greenfoot.getRandomNumber(2) == 0 ? true : false;
             if (spawnAtTop){
@@ -91,11 +91,30 @@ public class VehicleWorld extends World
             }
         }
         
+        //Chance to spawn a super pedestrian
+        if (Greenfoot.getRandomNumber (120) == 0){
+            int xSpawnLocation = Greenfoot.getRandomNumber (600) + 50; // random between 99 and 699, so not near edges
+            boolean spawnAtTop = Greenfoot.getRandomNumber(2) == 0 ? true : false;
+            if (spawnAtTop){
+                addObject (new SuperPed (1), xSpawnLocation, 50);
+            } else {
+                addObject (new SuperPed (-1), xSpawnLocation, 550);
+            }
+        }
         
         //chance to explode sun
-        if(Greenfoot.getRandomNumber(600)== 0 ){
+        if(Greenfoot.getRandomNumber(4500)== 0){
             addObject(new Sun(),800, 0);
-            System.out.println("Here");
+        }
+        
+        int corpseCount = 0;
+        for (Pedestrian p : getObjects(Pedestrian.class)){
+            if (!p.isAwake()){
+                corpseCount++;
+            }
+        }
+        if (corpseCount >= corpse){
+            addObject(new Sun(),800, 0);
         }
     }
 
@@ -153,8 +172,20 @@ public class VehicleWorld extends World
 
         // draw top border
         target.setColor (GREY_BORDER);
-        target.fillRect (0, startY, target.getWidth(), spacing);
+        
+        
+        
+        
+        
+        
+        
+        //target.fillRect (0, startY, target.getWidth(), spacing);
 
+        
+        
+        
+        
+        
         // Main Loop to Calculate Positions and draw lanes
         for (int i = 0; i < lanes; i++){
             // calculate the position for the lane
@@ -163,10 +194,15 @@ public class VehicleWorld extends World
             // draw lane
             target.setColor(GREY_STREET); 
             // the lane body
-            target.fillRect (0, lanePositions[i] - heightOffset, target.getWidth(), heightPerLane);
+            
+            
+            
+            //target.fillRect (0, lanePositions[i] - heightOffset, target.getWidth(), heightPerLane);
             // the lane spacing - where the white or yellow lines will get drawn
-            target.fillRect(0, lanePositions[i] + heightOffset, target.getWidth(), spacing);
+            //target.fillRect(0, lanePositions[i] + heightOffset, target.getWidth(), spacing);
 
+            
+            
             // Place spawners and draw lines depending on whether its 2 way and centre split
             if (twoWay && centreSplit){
                 // first half of the lanes go rightward (no option for left-hand drive, sorry UK students .. ?)
@@ -181,12 +217,12 @@ public class VehicleWorld extends World
                 // draw yellow lines if middle 
                 if (i == lanes / 2){
                     target.setColor(YELLOW_LINE);
-                    target.fillRect(0, lanePositions[i] - heightOffset - spacing, target.getWidth(), spacing);
+                    //target.fillRect(0, lanePositions[i] - heightOffset - spacing, target.getWidth(), spacing);
 
                 } else if (i > 0){ // draw white lines if not first lane
                     for (int j = 0; j < target.getWidth(); j += 120){
                         target.setColor (Color.WHITE);
-                        target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
+                        //target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
                     }
                 } 
 
@@ -203,12 +239,12 @@ public class VehicleWorld extends World
                 if (i > 0){ // but not in first position
                     if (i % 2 == 0){
                         target.setColor(GREY_BORDER);
-                        target.fillRect(0, lanePositions[i] - heightOffset - spacing, target.getWidth(), spacing);
+                        //target.fillRect(0, lanePositions[i] - heightOffset - spacing, target.getWidth(), spacing);
 
                     } else { // draw dotted lines
                         for (int j = 0; j < target.getWidth(); j += 120){
                             target.setColor (YELLOW_LINE);
-                            target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
+                            //target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
                         }
                     } 
                 }
@@ -218,14 +254,14 @@ public class VehicleWorld extends World
                 if (i > 0){
                     for (int j = 0; j < target.getWidth(); j += 120){
                         target.setColor (Color.WHITE);
-                        target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
+                        //target.fillRect (j, lanePositions[i] - heightOffset - spacing, 60, spacing);
                     }
                 }
             }
         }
         // draws bottom border
         target.setColor (GREY_BORDER);
-        target.fillRect (0, lanePositions[lanes-1] + heightOffset, target.getWidth(), spacing);
+        //target.fillRect (0, lanePositions[lanes-1] + heightOffset, target.getWidth(), spacing);
 
         return lanePositions;
     }

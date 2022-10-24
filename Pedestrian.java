@@ -8,7 +8,7 @@ public abstract class Pedestrian extends SuperSmoothMover
     protected double speed;
     protected double maxSpeed;
     protected int direction;
-    public static boolean awake;
+    protected boolean awake;
     public Pedestrian(int direction) {
         // choose a random speed
         maxSpeed = Math.random() * 2 + 1;
@@ -54,11 +54,11 @@ public abstract class Pedestrian extends SuperSmoothMover
         awake = true;
     }
     
-    public static boolean isAwake () {
+    public boolean isAwake () {
         return awake;
     }
     
-    public static boolean isNotAwake () {
+    public boolean isNotAwake () {
         if (awake = true){
             return false;
         }
