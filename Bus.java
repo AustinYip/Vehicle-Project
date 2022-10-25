@@ -5,7 +5,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Bus extends Vehicle
 {
-    public int timer;
+    private int timer;
+    
+    //private GreenfootSound kidnap = new GreenfootSound("kidnap.mp3");
+    private GreenfootSound[] kidnap = new GreenfootSound[10];
+    int soundIndex = 0;
     public Bus(VehicleSpawner origin){
         super (origin); // call the superclass' constructor first
         
@@ -15,6 +19,10 @@ public class Bus extends Vehicle
         // because the Bus graphic is tall, offset it a up (this may result in some collision check issues)
         yOffset = 15;
         timer = 0;
+        for (int i = 0; i<kidnap.length; i++)
+        {
+            kidnap[i] = new GreenfootSound("sounds/kidnap.mp3");
+        }
     }
 
     /**
@@ -44,6 +52,10 @@ public class Bus extends Vehicle
                 timer = 60;
                 speed = 0;
                 getWorld().removeObject(p);
+                kidnap[soundIndex].setVolume(50);
+                kidnap[soundIndex].play();
+                soundIndex = (soundIndex+1)%kidnap.length; 
+                
                 return true;
             }
             return false;

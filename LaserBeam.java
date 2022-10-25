@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LaserBeam extends Actor
 {
-    private int timer = 300;
+    private int timer = 60;
     GreenfootImage[] laserEffect = new GreenfootImage[3];
     
     int imageIndex = 0;
@@ -16,8 +16,8 @@ public class LaserBeam extends Actor
     {
         
         setImage(laserEffect[imageIndex]);
-        if(timer % 10 == 0)
-            imageIndex = (imageIndex+1)%laserEffect.length; 
+        imageIndex = (imageIndex+1)%laserEffect.length; 
+            
         timer--;
         if (timer ==0){
             getWorld().removeObject(this);

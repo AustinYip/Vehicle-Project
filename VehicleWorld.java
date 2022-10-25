@@ -27,13 +27,14 @@ public class VehicleWorld extends World
     private VehicleSpawner[] laneSpawners;
     
     
+    private GreenfootSound ambient = new GreenfootSound("ambient.mp3");
+    
     private static final int corpse = 10;
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
-    public VehicleWorld()
-    {    
+    public VehicleWorld(){    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 600, 1, false); 
 
@@ -58,7 +59,8 @@ public class VehicleWorld extends World
     }
     public void act () {
         spawn();
-        
+        ambient.playLoop();
+        ambient.setVolume(50);
     }
     private void spawn () {
         // Chance to spawn a vehicle

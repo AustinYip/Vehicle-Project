@@ -9,6 +9,8 @@ public abstract class Pedestrian extends SuperSmoothMover
     protected double maxSpeed;
     protected int direction;
     protected boolean awake;
+    
+    private GreenfootSound dead = new GreenfootSound("splat.mp3");
     public Pedestrian(int direction) {
         // choose a random speed
         maxSpeed = Math.random() * 2 + 1;
@@ -42,6 +44,8 @@ public abstract class Pedestrian extends SuperSmoothMover
     public void knockDown () {
         speed = 0;
         setRotation (90);
+        dead.setVolume(55);
+        dead.play();
         awake = false;
     }
 

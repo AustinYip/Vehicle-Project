@@ -77,7 +77,8 @@ public class Explosion extends Effect
 
     public void addedToWorld (World w){
         if (maxSize > 30){
-            explosionSound.setVolume(Math.min(maxSize, 60));
+            explosionSound.setVolume(100);
+
             explosionSound.play();
         }
     }

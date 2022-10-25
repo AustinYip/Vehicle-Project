@@ -12,7 +12,7 @@ public class Superman extends Vehicle
      * Act - do whatever the Superman wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+    private GreenfootSound laser = new GreenfootSound("laser.mp3");    
     public Superman(VehicleSpawner origin) {
         super(origin); // call the superclass' constructor
         maxSpeed = 1.5 + ((Math.random() * 30)/2);
@@ -33,16 +33,9 @@ public class Superman extends Vehicle
             if (!p.isAwake()){
                 getWorld().removeObject(p);
                 clearLane();
+                laser.play();
                 return true;
             }
-        }
-        return false;
-    }
-    public boolean checkHitVehicle(){
-        Vehicle h = (Vehicle)getOneIntersectingObject(Vehicle.class);
-        if (h != null){
-                clearLane();
-                return true;
         }
         return false;
     }
