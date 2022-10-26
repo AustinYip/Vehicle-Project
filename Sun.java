@@ -15,14 +15,17 @@ public class Sun extends Actor
      * Act - do whatever the sun wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+
     public Sun(){
         setImage(image);
         actsLeft = 180;
     }
-    public void act()
-    {
+
+    public void act() {
+        //timer
         actsLeft--;
+        
+        //depending on the timer, set the image and once timer hits 0, add explosion
         if (actsLeft == 120){
             setImage (redImage);
         } else if (actsLeft == 60){
@@ -31,7 +34,7 @@ public class Sun extends Actor
         else if (actsLeft == 0){
             int explosionSize = 2000;
             getWorld().addObject(new Explosion(explosionSize), getX(), getY());
-            
+
             getWorld().removeObject(this);
         }
     }

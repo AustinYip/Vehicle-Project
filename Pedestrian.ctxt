@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Pedestrian
-comment0.text=\r\n\ A\ Pedestrian\ that\ tries\ to\ walk\ across\ the\ street\r\n
+comment0.text=\r\n\ Abstract\ class\ for\ the\ pedestrian\ (blueprint\ or\ base)\r\n
 comment1.params=direction
 comment1.target=Pedestrian(int)
 comment2.params=
@@ -14,6 +14,4 @@ comment4.target=void\ healMe()
 comment4.text=\r\n\ Method\ to\ allow\ a\ downed\ Pedestrian\ to\ be\ healed\r\n
 comment5.params=
 comment5.target=boolean\ isAwake()
-comment6.params=
-comment6.target=boolean\ isNotAwake()
-numComments=7
+numComments=6

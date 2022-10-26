@@ -1,4 +1,4 @@
-    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * fade away effect 
@@ -10,7 +10,7 @@
 public class Effect extends Actor
 {
     protected GreenfootImage image;
-    
+
     protected void fade (int timeLeft, int fadeTime) {
         double percent = timeLeft / (double)fadeTime;
         // Transparency 0 -- 255

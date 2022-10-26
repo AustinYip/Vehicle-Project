@@ -8,21 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SuperPed extends Pedestrian
 {
-    /**
-     * Act - do whatever the SuperPed wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    //variables for timer and if supermode is true
     private int timer = 240;
     private boolean supermode;
-    
-    
-    
+
     GreenfootImage[] walkingRight = new GreenfootImage[9];
     GreenfootImage[] walkingRightSuper = new GreenfootImage[9];
+    int imageIndex = 0;
+    int imageIndex2 = 0;
+
     private GreenfootImage image = new GreenfootImage("dead2.png");
     public SuperPed(int direction) {
         super(direction);
-         // choose a random speed
+        // choose a random speed (slower than a normal pedestrian due to its bigger size and its power
         maxSpeed = Math.random() + 1;
         speed = maxSpeed;
         // start as awake 
@@ -37,21 +35,25 @@ public class SuperPed extends Pedestrian
             walkingRightSuper[i] = new GreenfootImage("images/superwalking2/tile00" + i + ".png");
         }
     }
-    
-    int imageIndex = 0;
-    int imageIndex2 = 0;
-    public void act()
-    {
+
+    public void act() {
         timer--;
-        
+
+        //once the timer reaches 60, meaning 3 seconds has passed, supermode is activated
         if (timer == 60){
             supermode = true;
         }
+
+        //once the timer reaches 0, meaning supermode's 1 second has passed, supermode is deactivated and timer is reset
         if (timer == 0){
             supermode = false;
             timer = 480;
         }
+
+        //if supermode is on, the superpedestrian heals himself
         superact();
+
+        //animates the super pedestrian depending on the mode
         if (supermode == false){
             setImage(walkingRight[imageIndex]);
             imageIndex = (imageIndex+1)%walkingRight.length; 
@@ -70,11 +72,13 @@ public class SuperPed extends Pedestrian
                 getWorld().removeObject(this);
             }
         }
+
+        //if the super pedestrian is dead, set image
         else{
             setImage(image);
         }
     }
-    
+
     private void superact(){
         if (supermode){
             if(!awake){

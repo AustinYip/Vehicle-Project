@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * A Pedestrian that tries to walk across the street
+ * Abstract class for the pedestrian (blueprint or base)
  */
 public abstract class Pedestrian extends SuperSmoothMover
 {
@@ -9,7 +9,7 @@ public abstract class Pedestrian extends SuperSmoothMover
     protected double maxSpeed;
     protected int direction;
     protected boolean awake;
-    
+
     private GreenfootSound dead = new GreenfootSound("splat.mp3");
     public Pedestrian(int direction) {
         // choose a random speed
@@ -24,8 +24,8 @@ public abstract class Pedestrian extends SuperSmoothMover
      * Act - do whatever the Pedestrian wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act()
-    {
+    public void act() {
+        //pedestrian walks if awake
         if (awake){
             if (getOneObjectAtOffset(0, (int)(direction * getImage().getHeight()/2 + (int)(direction * speed)), Vehicle.class) == null){
                 setLocation (getX(), getY() + (int)(speed*direction));
@@ -57,17 +57,9 @@ public abstract class Pedestrian extends SuperSmoothMover
         setRotation (0);
         awake = true;
     }
-    
+
+    //returns if the pedestrian is awake
     public boolean isAwake () {
         return awake;
-    }
-    
-    public boolean isNotAwake () {
-        if (awake = true){
-            return false;
-        }
-        else{
-            return true;
-        }
     }
 }

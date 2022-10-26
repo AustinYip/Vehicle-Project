@@ -38,9 +38,7 @@ public abstract class SuperSmoothMover extends Actor
      * 
      * @param distance  the distance to move in the current facing direction
      */
-    @Override
-    public void move(int distance)
-    {
+    public void move(int distance){
         move((double)distance);
     }
 
@@ -49,8 +47,7 @@ public abstract class SuperSmoothMover extends Actor
      * 
      * @param distance the precise distance to move in the current facing direction
      */
-    public void move(double distance)
-    {
+    public void move(double distance){
         double radians = Math.toRadians(getRotation());
         double dx = Math.cos(radians) * distance;
         double dy = Math.sin(radians) * distance;
@@ -125,8 +122,7 @@ public abstract class SuperSmoothMover extends Actor
      * @param x the new x location
      * @param y the new y location
      */
-    public void setLocation(double x, double y) 
-    {
+    public void setLocation(double x, double y) {
         exactX = x;
         exactY = y;
         super.setLocation((int) (x + 0.5), (int) (y + 0.5));
@@ -140,8 +136,7 @@ public abstract class SuperSmoothMover extends Actor
      * @param y the new y location
      */
     @Override
-    public void setLocation(int x, int y) 
-    {
+    public void setLocation(int x, int y) {
         exactX = x;
         exactY = y;
         super.setLocation(x, y);
@@ -152,8 +147,7 @@ public abstract class SuperSmoothMover extends Actor
      * 
      * @return double   the exact x coordinate, as a double
      */
-    public double getPreciseX() 
-    {
+    public double getPreciseX() {
         return exactX;
     }
 
@@ -162,11 +156,10 @@ public abstract class SuperSmoothMover extends Actor
      * 
      * @return double   the exact x coordinate, as a double
      */
-    public double getPreciseY() 
-    {
+    public double getPreciseY() {
         return exactY;
     }
-    
+
     public double getPreciseRotation (){
         return rotation;
     }

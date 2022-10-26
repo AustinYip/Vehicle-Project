@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList; //import the array list
 /**
  * Explosion actor
  * 
@@ -7,15 +7,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version November 2015
  */
 
-
-
 public class Explosion extends Effect
 {
 
     // This is static, so a single Array is created and shared by all Explosion objects.
     // This is safe because Greenfoot runs these commands consecutively, not simultaneously,
     // so there is no threat of a conflict. 
-    
+
     private GreenfootSound explosionSound = new GreenfootSound("explosion2.wav");
     private static GreenfootSound[] explosionSounds;
     private static int explosionSoundsIndex = 0; 
@@ -41,8 +39,7 @@ public class Explosion extends Effect
      * 
      * @param   maxSize     The size at which the explosion will stop growing and remove itself
      */
-    public Explosion (int maxSize)
-    {
+    public Explosion (int maxSize){
         // Create image to manage this graphic
         fireImage = new GreenfootImage (maxSize, maxSize);
         // Variables that control Colors for fire effect:
@@ -71,7 +68,7 @@ public class Explosion extends Effect
         redraw();
         // Set this Actor's graphic as the image I just created
         this.setImage(fireImage);
-        
+
         explosionSound.play();
     }
 
@@ -99,31 +96,30 @@ public class Explosion extends Effect
      * will serve to increase the size each act until maxSize is reached, at which
      * point the object will remove itself from existence.
      */
-    public void act() 
-    {
+    public void act() {
         redraw();   // redraw the circle at its new size
-
 
         if (radius + speed <= maxSize)  // If the explosion hasn't yet hit its max
             radius += speed;            // size, keep growing
 
         else{ // explosion has finished growing
-            for (Pedestrian p : getObjectsInRange(maxSize, Pedestrian.class)){
-                p.knockDown();
-                getWorld().removeObject(p);
+            ArrayList<Vehicle> vehicles = (ArrayList<Vehicle>) getWorld().getObjects(Vehicle.class);
+            ArrayList<Pedestrian> pedestrian = (ArrayList<Pedestrian>) getWorld().getObjects(Pedestrian.class);
+            for (Vehicle v : vehicles){
+                v.getWorld().removeObject(v);
             }
-            for (Vehicle v : getObjectsInRange(maxSize, Vehicle.class)){
-                getWorld().removeObject(v);
+            for (Pedestrian p : pedestrian){
+                p.getWorld().removeObject(p);
             }
             getWorld().removeObject(this);
         }    
     }
+
     /**
      * redraw() method is a private method called by this object each act
      * in order to redraw the graphic
      */
-    private void redraw()
-    {
+    private void redraw() {
         // adjust colors
         green = Math.min(255, Math.max(0, green + (150 / steps)));
         blue = Math.min(255, Math.max(0, blue + (10 / steps)));
@@ -131,12 +127,12 @@ public class Explosion extends Effect
         // a crash
         /*
         if (transparency - (255 / steps) > 0){
-            transparency -= (255 / steps);
+        transparency -= (255 / steps);
         }
         else{
-            transparency = 0;
+        transparency = 0;
         }
-        */
+         */
         // update Color
         currentColor = new Color (red, green, blue);
 
@@ -147,5 +143,4 @@ public class Explosion extends Effect
         fireImage.fillOval ((maxSize - radius)/2, (maxSize - radius)/2, radius, radius);
         fireImage.setTransparency(transparency);
     }
-
 }

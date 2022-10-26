@@ -8,27 +8,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LaserBeam extends Actor
 {
-    private int timer = 60;
-    GreenfootImage[] laserEffect = new GreenfootImage[3];
-    
-    int imageIndex = 0;
-    public void act()
-    {
+    private int timer = 15;
+    private GreenfootImage image = new GreenfootImage("laser/Laser3.png");
+
+    public void act() {
+        //sets the image for the superman to call and summon (laser beam eyes)
+        setImage(image);
         
-        setImage(laserEffect[imageIndex]);
-        imageIndex = (imageIndex+1)%laserEffect.length; 
-            
+        //timer goes down, once it hits zero remove the laser beam
         timer--;
         if (timer ==0){
             getWorld().removeObject(this);
-        }
-        
-    }
-    
-    public void LaserBeam(){
-        for (int i = 0; i<laserEffect.length; i++)
-        {
-            laserEffect[i] = new GreenfootImage("images/laser/Laser" + i + ".png");
         }
     }
 }
